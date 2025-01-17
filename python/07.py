@@ -37,4 +37,4 @@ for i in range(4):
 valik = int(input("Vali lugu (1-4): "))
 print(f"Mängin: {nimi[valik-1]}")
 
-    
+print("tere maailm")
