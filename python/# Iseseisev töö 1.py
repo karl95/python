@@ -57,8 +57,8 @@ koht = 40
 
 busside_arv = math.ceil(inim/koht)
 if inim == koht:
-viimane_inim_arv = inim
-    else:
+    viimane_inim_arv = inim
+else:
         viimane_inim_arv = abs(inim - koht)
 
 print(f"(busside_arv): {busside_arv}")

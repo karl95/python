@@ -101,21 +101,6 @@ for pala in fail:
 fail.close()
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # Tahvli juurde
 # Mõned õpetajad on tavatsenud õpilasi tahvli juurde vastama kutsuda kuupäeva järgi vastavalt õpilaste nimekirjale. Näiteks 4. kuupäeval tuleb esimesena vastama nimekirjas 4. olev õpilane.
 # Failis nimekiri.txt on õpilaste nimed, igaüks eraldi real. Üks selline, mis on genereeritud leheküljel Random Name Generator. Võite ise koostada ka teistsuguse nimekirja.
