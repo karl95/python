@@ -53,6 +53,39 @@
 
 # ÜL-mis võtab mingid andmed veebist APIGA ja siis kuvame ja laseme kasutaja ise valida!
 
+# import requests
+
+# # API URL, kust andmed tulevad
+# url = "https://dummyjson.com/products"
+
+# # Teeme päringu veebilehele
+# response = requests.get(url)
+
+# # Kontrollime, kas päring oli edukas
+# if response.status_code == 200:
+#     data = response.json()  # Muudame JSON andmed sõnastikuks
+#     products = data.get('products', [])  # Saame kätte 'products' andmed
+
+#     otsing = "eggs"
+
+#     counter = 0
+
+#     for product in products:
+
+#         # print(product["title"])
+
+#         if otsing in product["title"]:
+#             counter+= 1
+#             print(product["title"])
+
+#     print(f"Leiti: {counter} tulemus")
+
+# else:
+#     print(f"Viga! Ei suutnud andmeid laadida. Staatuskood: {response.status_code}")
+
+ 
+# Chatgpt'st
+
 import requests
 
 # API URL, kust andmed tulevad
@@ -66,56 +99,30 @@ if response.status_code == 200:
     data = response.json()  # Muudame JSON andmed sõnastikuks
     products = data.get('products', [])  # Saame kätte 'products' andmed
 
-    otsing = "Fish Steak"
+    otsing = input(f"Sisesta märksõna otsimiseks (näiteks Apple): ").strip().lower()
 
     counter = 0
 
+    # Läbime kõik tooted ja otsime sobivaid tulemusi
     for product in products:
+        title = product.get("title", "").lower()
+        description = product.get("description", "").lower()
+        brand = product.get("brand", "").lower()
+        category = product.get("category", "").lower()
+        product_id = str(product.get("id", ""))
 
-        # print(product["title"])
+        # Otsime märksõna nii pealkirjast, kirjeldusest, kategooriast, kaubamärgist kui ka ID-st
+        if otsing in title or otsing in description or otsing in brand or otsing in category or otsing in product_id:
+            counter += 1
+            print(f"ID: {product_id}, Pealkiri: {title.capitalize()}, Kaubamärk: {brand.capitalize()}, Kategooria: {category.capitalize()}, Hind: {product.get('price')}€, Hinne: {product.get('rating')}")
 
-        if otsing in product["title"]:
-            counter+=1
-            print(product["title"])
+    if counter == 0:
+        print("Otsing ei andnud tulemusi.")
+    else:
+        print(f"Leiti: {counter} tulemus(t).")
 
-            print(f"Leiti: {counter} tulemus")
-
-        else:
-            print(f"Viga! Ei suutnud andmeid laadida. Staatuskood: {response.status_code}")
-
-    # otsing = input("Sisesta otsingukriteerium (title, category, price, description, rating): ").strip().lower()
-
-    # otsinguväärtus = input(f"Sisesta otsitav väärtus {otsing} järgi: ").strip().lower()
-
-    # leitud_tooted = False
-
-    # for product in products:
-    #     if otsing == 'title' and otsinguväärtus in product.get('title', '').lower():
-    #         leitud_tooted = True
-    #         print(product)
-    #     elif otsing == 'category' and otsinguväärtus in product.get('category', '').lower():
-    #         leitud_tooted = True
-    #         print(product)
-    #     elif otsing == 'price':
-    #         try:
-    #             if float(otsinguväärtus) == product.get('price'):
-    #                 leitud_tooted = True
-    #                 product(product)
-    #         except ValueError:
-    #             print("Hind peab olema arvuline!")
-    #     elif otsing == 'description' and otsinguväärtus in product.get('description', '').lower():
-    #         leitud_tooted = True
-    #         print(product)
-    #     elif otsing == 'rating':
-    #         try:
-    #             if float(otsinguväärtus) == product.get('rating'):
-    #                 leitud_tooted = True
-    #                 product(product)
-    #         except ValueError:
-    #             print("Hinne peab olema arvuline!")
-
-    # if not leitud_tooted:
-    #     print(f"Toodet ei leitud {otsing} väärtusega '{otsinguväärtus}'.")
+else:
+    print(f"Viga! Ei suutnud andmeid laadida. Staatuskood: {response.status_code}")
 
 
 
